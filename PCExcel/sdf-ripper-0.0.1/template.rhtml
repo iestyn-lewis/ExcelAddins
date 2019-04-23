@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>PubChem CID <%= @start_cid %>-<%= @end_cid %></title>
+  </head>
+  <body>
+  <center>
+    <a href="http://pubchem.ncbi.nlm.nih.gov/"><img src="http://depth-first.com/files/pubchemlogo.gif" border="0"></img></a>
+    <a href="http://ruby-lang.org"><img src="http://depth-first.com/files/ruby_logo_new.gif" border="0"></img></a><a href="http://cdk.sf.net"><img src="http://depth-first.com/files/cdk_logo.png" border="0"></img></a>
+    <a href="http://www.opensource.org/docs/definition.php"><img src="http://www.opensource.org/trademarks/opensource/web/opensource-110x95.png" alt="Open Source (OSI) Logo" border="0" width="110" height="95"></a>
+  </center>
+  <center><h1>PubChem's First 500 Compounds</h1></center>
+  <p><font size="+2">What you see below are 2-D representations of the first 500 compounds in <a href="http://pubchem.ncbi.nlm.nih.gov/">PubChem</a>. They were generated with the Open Source cheminformatics toolkit <a href="http://rubyforge.org/projects/rcdk">Ruby Chemistry Development Kit</a> (RCDK). Click on an image to see the PubChem compound summary. An article describing the short <a href="http://ruby-lang.org">Ruby</a> program that created this page can be found <a href="http://depth-first.com/articles/2006/11/13/cheminformatics-for-the-web-convert-sd-files-to-html-with-ruby-cdk">here</a>.</font></p>
+    <center>
+    <table>
+      <tr>
+      <% col = 0 %>
+      <% for cid in @start_cid..@end_cid %>
+        <td><a href="http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=<%= cid %>"><img src="<%= "images/#{cid}.png"%>"></img></a><br /><center><a href="http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=<%= cid %>"><%= cid %></a></center></td>
+        <% col += 1 %>
+        <% if col > 4 %>
+          <% col = 0 %>
+          </tr>
+          <tr>
+        <% end %>
+      <%end %>
+      </tr>
+    </table>
+  </body>
+  </center>
+</html>

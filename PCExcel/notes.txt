@@ -1,0 +1,13 @@
+SMILES
+
+babel -ismi <smiles> -osdf <sdf>
+
+MOL
+
+mol2ps <sdf> > <ps>
+
+PostScript
+
+???
+
+PNG

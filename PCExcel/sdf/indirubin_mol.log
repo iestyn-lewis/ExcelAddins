@@ -1,0 +1,44 @@
+Log file opened on Tuesday, September 11, 2007, 10:13
+Importing SDFile C:\Documents and Settings\Iestyn\My Documents\Source\PCExcel\sdf\indirubin_mol.sdf
+Overwriting database C:\Documents and Settings\Iestyn\My Documents\Source\PCExcel\sdf\indirubin_mol.mdb
+Database version: ChemFinder 9.0; Mst version: 54
+Starting at beginning -- line 1.
+Redundant reagents will only be stored once.
+A ChemDraw-style (CDX) version will only be stored where distinct from the ChemFinder version.
+
+SDFile Input Fields
+Structure      	type=Structure
+MolfileName    	type=Text(20)
+
+Created column MolfileName: Text
+Creating form
+Records found in input file: 1
+Structures in current database: 0
+Records in current database: 0
+Next available mol ID: 1
+-------------------------
+$>Bond(s) 1,3,6,8,15,17,19 have ambiguous stereochemistry as drawn.
+$>...Record 1, starting at line 0
+End of file reached
+Total import time: 0 secs, secs per record = 0.47
+
+     0 Errors, 0 distinct.
+     1 Warnings, 1 distinct.
+     0 records existed at start of import.
+     1 records exist after import.
+     1 records were read from file.
+     1 records were created in database.
+     1 principal structures were created.
+     0 secondary structures were created.
+     0 input records were merged with preexisting ones.
+  Principal structures inhabit the "Structure" field in the
+  main table.  Secondary structures are catalysts and reagents,
+  which are visible only from secondary tables.
+
+
+The following log messages were encountered:
+       #Times
+Warn     x1 Bond(s) * have ambiguous stereochemistry as drawn.
+
+Form file saved: C:\Documents and Settings\Iestyn\My Documents\Source\PCExcel\sdf\indirubin_mol.CFW
+Log file closed on Tuesday, September 11, 2007, 10:13

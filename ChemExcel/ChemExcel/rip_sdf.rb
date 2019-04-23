@@ -1,0 +1,61 @@
+require 'rubygems'
+require_gem 'rcdk'
+require 'rcdk/util'
+require 'c:\chemexcel\sdf'
+require 'erb'
+      
+class SDFRipper
+
+  def initialize(sdf_filename, output_dir, image_width, image_height, gen_coords)
+    @filename = sdf_filename
+    @output_dir = output_dir
+    @image_width = image_width
+    @image_height = image_height
+    @gen_coords = gen_coords
+
+    begin
+      Dir.mkdir(output_dir)
+      Dir.mkdir("#{@output_dir}/images")
+
+      puts "Created image directories."
+    rescue
+      puts "Re-using image directories."
+    end
+  end
+
+  def rip
+    puts "Scanning..."
+
+    splitter = SDFSplitter.new(@filename)
+		count = 1
+    splitter.each_record do |record|
+      cid = count
+			mol_string = Extractor.extract_molfile(record) 
+			File.open(@output_dir + "/" + cid.to_s + ".mol", "w") { |molfile| molfile.write(mol_string) }
+      write_image(mol_string, cid)
+			#write_smiles(mol_string, cid)
+			count += 1
+    end
+
+  end
+
+  def write_smiles(mol_string, cid)
+		 smi_string = RCDK::Util::Lang.molfile_to_smiles(mol_string) 
+     File.open(@output_dir + "/smiles/" + cid.to_s + ".smi", "w") { |smifile| molfile.write(smi_string) }
+  end
+	
+  def write_image(mol_string, cid)
+    begin
+      if (@gen_coords == "true") 
+        mol_string = RCDK::Util::XY.coordinate_molfile(mol_string)
+        File.open(@output_dir + "/" + cid.to_s + ".mol", "w") { |molfile| molfile.write(mol_string) }
+      end
+      RCDK::Util::Image.molfile_to_png(mol_string, "#{@output_dir}/images/#{cid}.png", Integer(@image_width), Integer(@image_height))
+
+      puts "Wrote CID-#{cid}"
+    rescue
+      puts "CDK Error: Skipping CID-#{cid}"
+    end
+  end
+end
+

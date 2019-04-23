@@ -1,0 +1,25 @@
+CID
+http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pccompound&id=667032
+http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=667032
+
+SID
+http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?sid=865771
+http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pcsubstance&id=865771
+
+
+well name:
+
+-- check first character of name to see if it is alphabetic.  If it is, pass it through with the
+-- column number following.
+-- if it is not, check the ascii code to see if it is in range.  if it is, change to single character
+-- if it is not, change to double character (1536 well plates)
+
+
+decode(sign(ascii(substr(name, 1,1)) - 65), 
+		1, substr(name, 1,1) || trim('0' from substr(name, 3, 2)), 
+		0, substr(name, 1,1) || trim('0' from substr(name, 3, 2)), 
+		-1, 
+			decode(sign(substr(name, 1, 2) - 90),
+				-1, chr(64 + substr(name, 1,2)) || trim('0' from substr(name, 4, 2)),
+				0, chr(64 + substr(name, 1,2)) || trim('0' from substr(name, 4, 2)),
+				1, 'A' || chr(32 + substr(name, 1,2)) || trim('0' from substr(name, 4, 2))))
